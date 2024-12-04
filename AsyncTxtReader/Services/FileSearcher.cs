@@ -5,7 +5,7 @@ namespace AsyncTxtReader.Services
     class FileSearcher : IFileSearcher
     {
         /// <summary>
-        /// Метод поиска файлов по паттерну в заданной директории, не реализован асинхронно, 
+        /// Метод поиска файлов по паттерну в заданной директории не реализован асинхронно, 
         /// т.к. метод Directory.GetFiles блокирует поток, а его асинхронная реализация не была найдена
         /// </summary>
         /// <param name="directory"></param>

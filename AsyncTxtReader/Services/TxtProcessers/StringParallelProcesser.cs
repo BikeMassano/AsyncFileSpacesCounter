@@ -49,22 +49,18 @@ namespace AsyncTxtReader.Services.TxtProcessers
         {
             try
             {
+                // Переменная для подсчёта кол-ва пробелов
                 int totalSpaces = 0;
-                await foreach (var line in File.ReadLinesAsync(filePath)) // Предполагается, что у _fileOpener есть метод ReadLinesAsync.
+                // Ждём подсчёта
+                await foreach (var line in File.ReadLinesAsync(filePath))
                 {
-                    totalSpaces += line.Count(c => c == ' ');
+                    // Прибавляем кол-во пробелов с текущей строки
+                    totalSpaces += _spaceCounter.CountSpaces(line);
                 }
                 return totalSpaces;
             }
-            catch (FileNotFoundException)
+            catch
             {
-                // Логируем исключение для лучшей отладки. Не следует молча игнорировать все исключения.
-                Console.Error.WriteLine($"Файл не найден: {filePath}");
-                return 0;
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine($"Ошибка обработки файла {filePath}: {ex.Message}");
                 return 0;
             }
         }
